@@ -13,7 +13,7 @@ module BetterDatePicker
     end
 
     module ClassMethods
-      def better_time_picker(field, options = {})
+      def better_date_picker(field, options = {})
         self.better_date_fields ||= []
         self.better_date_defaults ||= {}
 

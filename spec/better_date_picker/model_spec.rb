@@ -9,7 +9,7 @@ describe BetterDatePicker::Model do
 
     attr_accessor :built_at
 
-    better_time_picker :built_at
+    better_date_picker :built_at
   end
 
   it 'allows the setting of a date via a string' do
