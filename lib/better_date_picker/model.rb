@@ -19,10 +19,8 @@ module BetterDatePicker
 
         define_method "#{field}=" do |date_val|
           #we don't want to clobber the ivar if we're setting via the string
-          unless setting_via_string?
-            val_to_set = date_val.nil? ? nil : date_val.strftime(self.class.better_date_format)
-            instance_variable_set("@#{field}_date", val_to_set)
-          end
+          val_to_set = date_val.nil? ? nil : date_val.strftime(self.class.better_date_format)
+          instance_variable_set("@#{field}_date", val_to_set)
 
           #if the setter is not defined as a method, just set the ivar
           begin
@@ -45,10 +43,8 @@ module BetterDatePicker
         end
 
         define_method "#{field}_date=" do |stringified_date|
-          setting_via_string do
-            instance_variable_set("@#{field}_date", stringified_date)
-            self.send("#{field}=", Chronic.parse(stringified_date))
-          end
+          instance_variable_set("@#{field}_date", stringified_date)
+          self.send("#{field}=", Chronic.parse(stringified_date))
           stringified_date
         end
 
@@ -59,20 +55,6 @@ module BetterDatePicker
       def better_date_format
        "%m/%d/%Y"
       end
-    end
-
-    protected
-    def setting_via_string(&block)
-      begin
-        @setting_via_string = true
-        block.call
-      ensure
-        @setting_via_string = false
-      end
-    end
-
-    def setting_via_string?
-      @setting_via_string
     end
   end
 end
