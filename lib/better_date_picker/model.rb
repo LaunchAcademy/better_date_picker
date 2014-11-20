@@ -66,7 +66,9 @@ module BetterDatePicker
       if self.class.better_date_fields && !self.class.better_date_fields.empty?
         self.class.better_date_fields.each do |field|
           if self.errors[field].present?
-            self.errors["#{field}_date"] = self.errors[field]
+            self.errors[field].each do |error|
+              self.errors.add("#{field}_date", error)
+            end
           end
         end
       end
