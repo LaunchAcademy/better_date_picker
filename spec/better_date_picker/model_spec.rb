@@ -9,6 +9,9 @@ describe BetterDatePicker::Model do
 
     attr_accessor :built_at
 
+    validates :built_at,
+      presence: true
+
     better_date_picker :built_at
   end
 
@@ -44,5 +47,11 @@ describe BetterDatePicker::Model do
     widget.built_at_date = 'yesterday'
     widget.built_at = nil
     expect(widget.built_at_date).to be_nil
+  end
+
+  it 'propagates errors to the stringified version when validated' do
+    widget = Widget.new
+    expect(widget).to_not be_valid
+    expect(widget.errors[:built_at_date]).to_not be_blank
   end
 end

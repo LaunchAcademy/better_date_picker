@@ -17,6 +17,10 @@ module BetterDatePicker
         self.better_date_fields ||= []
         self.better_date_defaults ||= {}
 
+        if self.better_date_fields.empty?
+          after_validation :propagate_better_date_errors
+        end
+
         define_method "#{field}=" do |date_val|
           #we don't want to clobber the ivar if we're setting via the string
           val_to_set = date_val.nil? ? nil : date_val.strftime(self.class.better_date_format)
@@ -54,6 +58,17 @@ module BetterDatePicker
 
       def better_date_format
        "%m/%d/%Y"
+      end
+    end
+
+    protected
+    def propagate_better_date_errors
+      if self.class.better_date_fields && !self.class.better_date_fields.empty?
+        self.class.better_date_fields.each do |field|
+          if self.errors[field].present?
+            self.errors["#{field}_date"] = self.errors[field]
+          end
+        end
       end
     end
   end
