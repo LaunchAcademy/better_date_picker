@@ -1,5 +1,7 @@
 # BetterDatePicker
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/LaunchAcademy/better_date_picker?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 TODO: Write a gem description
 
 ## Installation
