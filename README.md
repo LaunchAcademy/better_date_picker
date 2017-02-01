@@ -1,6 +1,8 @@
 # BetterDatePicker
 
-TODO: Write a gem description
+![Better Date Picker](better_date_picker.png)
+
+Add a better date picker to Rails forms.
 
 ## Installation
 
@@ -18,7 +20,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+1) Add a date field to a table in your database. (e.g.- `enrollment_closes`)
+
+2) Add some code to your model:
+
+```ruby
+include BetterDatePicker::Model
+better_date_picker :enrollment_closes
+```
+
+3) Set a class on the form field input (e.g.- `date`)
+
+4) Add some JS to enable the DateTime picker
+
+```js
+$(function(){
+  $('.date').datetimepicker({
+    timepicker: false,
+    format: 'm/d/Y'
+  });
+})
+```
+
 
 ## Contributing
 
